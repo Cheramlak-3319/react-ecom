@@ -3,7 +3,8 @@ import { useFilter } from "./FilterContext";
 import { LuTally3 } from "react-icons/lu";
 
 const MainContent = () => {
-  const { searchQuery, selectedCategory, keyword, minPrice, maxPrice } = useFilter();
+  const { searchQuery, selectedCategory, keyword, minPrice, maxPrice } =
+    useFilter();
   const [products, setProducts] = useState<any[]>([]);
   const [filter, setFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,7 +28,9 @@ const MainContent = () => {
 
         // Category
         if (selectedCategory) {
-          filtered = filtered.filter((p: any) => p.category === selectedCategory);
+          filtered = filtered.filter(
+            (p: any) => p.category === selectedCategory
+          );
         }
 
         // Keyword
@@ -51,7 +54,9 @@ const MainContent = () => {
         } else if (filter === "expensive") {
           filtered = [...filtered].sort((a, b) => b.price - a.price);
         } else if (filter === "popular") {
-          filtered = [...filtered].sort((a, b) => b.rating.rate - a.rating.rate);
+          filtered = [...filtered].sort(
+            (a, b) => b.rating.rate - a.rating.rate
+          );
         }
 
         // Pagination
@@ -65,7 +70,15 @@ const MainContent = () => {
     };
 
     fetchProducts();
-  }, [currentPage, searchQuery, selectedCategory, keyword, minPrice, maxPrice, filter]);
+  }, [
+    currentPage,
+    searchQuery,
+    selectedCategory,
+    keyword,
+    minPrice,
+    maxPrice,
+    filter,
+  ]);
 
   return (
     <section className="xl:w-[55rem] lg:w-[55rem] md:w-[40rem] sm:w-[20rem] p-5">
@@ -77,7 +90,9 @@ const MainContent = () => {
             className="flex gap-2 items-center border px-4 py-2 rounded-full hover:bg-gray-100"
           >
             <LuTally3 />
-            {filter === "all" ? "Filter" : filter.charAt(0).toUpperCase() + filter.slice(1)}
+            {filter === "all"
+              ? "Filter"
+              : filter.charAt(0).toUpperCase() + filter.slice(1)}
           </button>
 
           {dropDown && (
@@ -114,9 +129,13 @@ const MainContent = () => {
                 alt={product.title}
                 className="w-full h-40 object-cover mb-2 rounded"
               />
-              <h2 className="font-semibold text-lg line-clamp-1">{product.title}</h2>
+              <h2 className="font-semibold text-lg line-clamp-1">
+                {product.title}
+              </h2>
               <p className="text-gray-600">${product.price}</p>
-              <p className="text-sm capitalize text-gray-500">{product.category}</p>
+              <p className="text-sm capitalize text-gray-500">
+                {product.category}
+              </p>
             </div>
           ))}
         </div>
